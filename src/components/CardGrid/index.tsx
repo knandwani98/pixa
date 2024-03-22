@@ -17,6 +17,7 @@ interface SearchProps {
   images: PhotoData[];
   keyword: string;
   page?: number;
+  retry?: boolean;
 }
 
 export const CardGrid = ({ className, searchQuery }: Props) => {
@@ -27,6 +28,7 @@ export const CardGrid = ({ className, searchQuery }: Props) => {
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [doRetry, setDoRetry] = useState<boolean>(false);
 
   const api = createApi({
     accessKey: vars.UNSPLASH_ACCESS_KEY!,
@@ -36,6 +38,7 @@ export const CardGrid = ({ className, searchQuery }: Props) => {
 
   useEffect(() => {
     setIsLoading(true);
+    setDoRetry(false);
     api.search
       .getPhotos({
         query: query,
@@ -48,6 +51,10 @@ export const CardGrid = ({ className, searchQuery }: Props) => {
 
         const data = response?.results;
 
+        if (response.total === 0) {
+          setDoRetry(true);
+        }
+
         if (query === searchData.keyword) {
           // @ts-ignore
           setSearchData((oldState) => ({
@@ -59,6 +66,7 @@ export const CardGrid = ({ className, searchQuery }: Props) => {
             images: data,
             keyword: query,
             page: 1,
+            retry: false,
           });
         }
       })
@@ -76,7 +84,7 @@ export const CardGrid = ({ className, searchQuery }: Props) => {
         <div className="h-full w-full flex-center">
           <Loader />
         </div>
-      ) : searchData.images.length === 0 ? (
+      ) : doRetry ? (
         <div className="h-full w-full flex-center">
           <p>No Match Found</p>
         </div>
