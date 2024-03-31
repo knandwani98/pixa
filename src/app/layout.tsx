@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Sora } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import { cn } from "@/utils";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 
 const sora = Sora({ subsets: ["latin"] });
 
@@ -20,17 +17,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          sora.className,
-          "text-black bg-white dark:bg-black dark:text-white"
-        )}
-      >
-        <ThemeProvider attribute="class">
-          <Header />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-        </ThemeProvider>
+      <body className={sora.className}>
+        <ThemeProvider attribute="class">{children}</ThemeProvider>
       </body>
     </html>
   );

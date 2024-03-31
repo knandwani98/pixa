@@ -23,6 +23,7 @@ export interface Links {
   portfolio?: string;
   following?: string;
   followers?: string;
+  download?: string;
 }
 
 export interface User {
@@ -174,3 +175,6 @@ export interface PhotoData {
   user: User;
   tags?: Tags[];
 }
+
+
+export type OrderBy = "editorial" | "relevant" | "latest";

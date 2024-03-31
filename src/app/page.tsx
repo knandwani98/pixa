@@ -1,17 +1,27 @@
-import { CardGrid } from "@/components/CardGrid";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { LoadMore } from "@/components/CardGrid/LoadMore";
 
-export default function Home({
+async function Home({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const searchQuery = searchParams?.query;
+  const searchOrder = searchParams?.order;
 
   if (Array.isArray(searchQuery)) return null;
+  if (Array.isArray(searchOrder)) return null;
 
   return (
-    <main className="">
-      <CardGrid searchQuery={searchQuery!} className="pt-8 px-8" />
-    </main>
+    <>
+      <Header searchQuery={searchQuery} />
+      <main className="min-h-screen">
+        <LoadMore searchQuery={searchQuery!} searchOrder={searchOrder!} />
+      </main>
+      <Footer />
+    </>
   );
 }
+
+export default Home;
