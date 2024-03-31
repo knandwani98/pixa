@@ -176,5 +176,5 @@ export interface PhotoData {
   tags?: Tags[];
 }
 
-
 export type OrderBy = "editorial" | "relevant" | "latest";
+export type OrientationBy = "squarish" | "landscape" | "portrait";

@@ -2,7 +2,7 @@ import { PhotoData } from "@/types";
 import { ArrowBigDownDash } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { Loader } from "../ui/design/Loader";
+import { Loader } from "../Loader";
 import { saveAs } from "file-saver";
 
 interface CardProps {

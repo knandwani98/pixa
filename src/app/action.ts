@@ -1,7 +1,12 @@
 "use server";
 
-import { DEFAULT_SEARCH_KEY, DEFAULT_SORT, vars } from "@/lib/constants";
-import { OrderBy } from "@/types";
+import {
+  DEFAULT_QUERY,
+  DEFAULT_SEARCH_KEY,
+  DEFAULT_SORT,
+  vars,
+} from "@/lib/constants";
+import { OrderBy, OrientationBy } from "@/types";
 import { createApi } from "unsplash-js";
 
 const api = createApi({
@@ -11,14 +16,22 @@ const api = createApi({
 interface Props {
   query?: string;
   page?: number;
-  orderBy?: OrderBy;
   perPage?: number;
+  orderBy?: OrderBy;
+  orientationBy?: OrientationBy;
 }
 
-export const fetchImages = async ({ query, page, orderBy, perPage }: Props) => {
+export const fetchImages = async ({
+  query,
+  page,
+  orderBy,
+  perPage,
+  orientationBy,
+}: Props) => {
   const response = await api.search.getPhotos({
     query: query || DEFAULT_SEARCH_KEY,
     orderBy: orderBy || DEFAULT_SORT,
+    orientation: orientationBy,
     perPage: perPage || 18,
     page: page || 1,
   });

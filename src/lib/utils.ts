@@ -1,15 +1,16 @@
-import { OrderBy, PhotoData } from "@/types";
+import { OrderBy, OrientationBy, PhotoData } from "@/types";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { DEFAULT_SORT, SORT_OPTIONS } from "./constants";
+import {
+  DEFAULT_ORIENTATION,
+  DEFAULT_SORT,
+  ORIENTATION_OPTIONS,
+  SORT_OPTIONS,
+} from "./constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
-export const alphabet = Array.from({ length: 26 }, (_, i) =>
-  String.fromCharCode("a".charCodeAt(0) + i)
-);
 
 export const findTotal = (count: number) => {
   if (count >= 1000) return `${(count / 1000).toFixed(1)}K`;
@@ -22,4 +23,16 @@ export const validateOrder = (searchOrder: string) => {
   }
 
   return DEFAULT_SORT;
+};
+
+export const validateOrientation = (searchOrientation: string) => {
+  if (searchOrientation === "all") {
+    return undefined;
+  }
+
+  if (searchOrientation && ORIENTATION_OPTIONS.includes(searchOrientation)) {
+    return searchOrientation as OrientationBy;
+  }
+
+  return undefined;
 };
