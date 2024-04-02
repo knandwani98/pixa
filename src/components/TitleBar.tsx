@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { ArrowUpDown, Image, LayoutPanelLeft } from "lucide-react";
+import { ArrowUpDown, Image, LayoutPanelLeft, X } from "lucide-react";
 import { Dropdown } from "./Dropdown";
 import {
   DEFAULT_FILTER,
@@ -11,7 +11,12 @@ import {
 import { useState, useTransition } from "react";
 import { OrderBy, OrientationBy } from "@/types";
 import { useRouter } from "next/navigation";
-import { findTotal, validateOrder, validateOrientation } from "@/lib/utils";
+import {
+  findTotal,
+  toCapitalize,
+  validateOrder,
+  validateOrientation,
+} from "@/lib/utils";
 
 interface Props {
   total: number;
@@ -38,7 +43,10 @@ export const TitleBar = (props: Props) => {
   const [isFilterOn, setIsFilterOn] = useState<{
     sort: boolean;
     orientation: boolean;
-  }>(DEFAULT_FILTER);
+  }>({
+    sort: !!searchOrder || DEFAULT_FILTER.sort,
+    orientation: !!searchOrientation || DEFAULT_FILTER.orientation,
+  });
 
   const handleSort = (item: OrderBy) => {
     setSortFilter(item);
@@ -74,24 +82,25 @@ export const TitleBar = (props: Props) => {
   };
 
   return (
-    <div className="px-8 flex items-center justify-between py-4 border-b-gray-200 border bg-white dark:bg-black dark:border-b-slate-700">
+    <div className="px-8 sm:flex items-center justify-between py-4 border-b-gray-200 border bg-white dark:bg-black dark:border-b-slate-700">
       {/* Total */}
+      <div className="hidden sm:flex">
+        {/* Label */}
+        <h2 className="text-xl flex items-center justify-center gap-2">
+          {/* Count */}
+          <Image />
+          {findTotal(total)}
+        </h2>
+      </div>
 
-      {
-        <p className="flex justify-between items-center gap-2">
-          <Image className="w-6 h-6 mb-0.5" />
-          Photos {findTotal(total)}
-        </p>
-      }
-
-      <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-row items-center justify-between gap-2">
         {/* Clear Button */}
         {(isFilterOn.sort || isFilterOn.orientation) && (
           <button
             onClick={removeFilter}
             className="cursor-pointer text-black/60 hover:text-black dark:text-white/80 dark:hover:text-white"
           >
-            clear
+            <X className="w-6 text-red-600" />
           </button>
         )}
 

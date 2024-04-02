@@ -36,3 +36,7 @@ export const validateOrientation = (searchOrientation: string) => {
 
   return undefined;
 };
+
+export const toCapitalize = (text: string) => {
+  return text[0].toUpperCase() + text.substring(1);
+};

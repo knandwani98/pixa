@@ -8,6 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { toCapitalize } from "@/lib/utils";
 
 interface Props {
   data: {
@@ -26,34 +27,30 @@ export const Dropdown = (props: Props) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className="text-gray-500 font-normal focus-visible:ring-1"
+          className="text-gray-500 font-normal focus-visible:ring-1 max-sm:w-full"
           variant={"outline"}
         >
-          <span className="">{data.headerIcon}</span>
-          {data.header}
+          <span>{data.headerIcon}</span>
+          <span className="hidden sm:flex">{data.header}</span>
           <span className="ml-1 font-semibold text-black/70 dark:text-white">
-            {data.filter
-              ? data.filter[0].toUpperCase() + data.filter?.substring(1)
-              : "all"}
+            {data.filter ? toCapitalize(data.filter) : "all"}
           </span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>{data.header}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
 
         {data.items.map((item) => (
-          <>
-            <DropdownMenuSeparator />
-            <DropdownMenuCheckboxItem
-              key={item}
-              className="cursor-pointer"
-              checked={item === data.filter}
-              disabled={item === data.filter}
-              onCheckedChange={() => setFunction(item)}
-            >
-              {item[0].toUpperCase() + item.substring(1)}
-            </DropdownMenuCheckboxItem>
-          </>
+          <DropdownMenuCheckboxItem
+            key={item}
+            className="cursor-pointer"
+            checked={item === data.filter}
+            disabled={item === data.filter}
+            onCheckedChange={() => setFunction(item)}
+          >
+            {toCapitalize(item)}
+          </DropdownMenuCheckboxItem>
         ))}
       </DropdownMenuContent>
     </DropdownMenu>

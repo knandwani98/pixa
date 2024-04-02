@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Sora } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const sora = Sora({ subsets: ["latin"] });
 
@@ -18,6 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <Link href="/favicon.ico" rel="icon" />
+      </head>
       <body className={sora.className}>
         <ThemeProvider attribute="class">{children}</ThemeProvider>
       </body>
