@@ -19,7 +19,7 @@ export const Card = ({ image }: CardProps) => {
 
   if (!image) return <Loader />;
 
-  // console.log(image);
+  if (!image.urls?.small) return null;
 
   return (
     <>
@@ -27,24 +27,19 @@ export const Card = ({ image }: CardProps) => {
       <div className="sm:hidden"></div>
 
       <div className="cursor-zoom-in relative group overflow-hidden break-inside-avoid h-auto rounded-md shadow-lg">
-        <Image
-          src={image.urls?.regular || image.urls?.small || ""}
-          alt={image.alt_description || ""}
-          width={image.width / 9}
-          height={image.height / 13}
+        <img
           className="w-full object-cover"
-          priority
+          src={image.urls?.small}
+          alt={image.alt_description || ""}
         />
 
         <div className="absolute -bottom-20 w-full flex justify-between items-center p-4  transition-all duration-200 ease-in-out group-hover:bottom-0 group-hover:bg-gradient-to-t from-black/30 to-transparent  cursor-default">
           {/* AVATAR */}
           <div className="flex items-center gap-2">
-            <Image
-              src={image.user.profile_image.medium}
-              width={40}
-              height={40}
-              alt={image.user.name}
+            <img
               className="rounded-full"
+              src={image.user.profile_image.medium}
+              alt={image.user.name}
             />
 
             <h3 className="text-white font-semibold">{image.user.name}</h3>
