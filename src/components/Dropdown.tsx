@@ -12,7 +12,7 @@ import { cn, toCapitalize } from "@/lib/utils";
 
 interface Props {
   noTitle?: boolean;
-  buttonStyle: string;
+  buttonStyle?: string;
   data: {
     header: string;
     items: string[];
