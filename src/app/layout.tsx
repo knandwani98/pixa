@@ -22,7 +22,9 @@ export default function RootLayout({
         <Link href="/favicon.ico" rel="icon" />
       </head>
       <body className={sora.className}>
-        <ThemeProvider attribute="class">{children}</ThemeProvider>
+        <ThemeProvider defaultTheme="system" attribute="class">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -13,6 +13,7 @@ export const NO_DATA_VECTOR = "/assets/no-data.png";
 
 export const SORT_OPTIONS = ["editorial", "relevant", "latest"];
 export const ORIENTATION_OPTIONS = ["all", "squarish", "landscape", "portrait"];
+export const DOWNLOAD_OPTIONS = ["small", "medium", "large"];
 
 export const DEFAULT_FILTER = {
   sort: false,
