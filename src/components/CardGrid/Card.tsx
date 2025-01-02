@@ -65,9 +65,7 @@ export const Card = ({ image }: CardProps) => {
             buttonStyle="w-12 h-12 flex justify-center items-center bg-primary/30 border-none"
             noTitle
             data={{
-              headerIcon: (
-                <ArrowBigDownDash className="dark:text-white -mr-1" />
-              ),
+              headerIcon: <ArrowBigDownDash className="text-white -mr-1" />,
               header: "Download Free",
               items: [...DOWNLOAD_OPTIONS],
               otherItems: ["original size"],
