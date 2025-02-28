@@ -113,6 +113,7 @@ export const TitleBar = (props: Props) => {
             filter: orientation || DEFAULT_ORIENTATION,
           }}
           setFunction={handleOrientation}
+          buttonStyle="max-sm:w-full"
         />
 
         {/* Sort Filter */}
@@ -124,6 +125,7 @@ export const TitleBar = (props: Props) => {
             filter: sortFilter || DEFAULT_SORT,
           }}
           setFunction={handleSort}
+          buttonStyle="max-sm:w-full"
         />
       </div>
     </div>

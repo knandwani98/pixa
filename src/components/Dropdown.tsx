@@ -31,7 +31,7 @@ export const Dropdown = (props: Props) => {
       <DropdownMenuTrigger asChild>
         <Button
           className={cn(
-            "text-gray-500 font-normal focus-visible:ring-1 max-sm:w-full",
+            "text-gray-500 font-normal focus-visible:ring-1",
             buttonStyle
           )}
           variant={"outline"}
